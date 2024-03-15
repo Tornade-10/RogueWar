@@ -13,7 +13,7 @@ public class WFCGenerator_Editor : Editor
 
         WFCGenerator generator = (WFCGenerator)target;
 
-        if (GUILayout.Button("Initiate"))
+        if (GUILayout.Button("Clear"))
         {
             generator.Initiate();
         }        
