@@ -79,7 +79,7 @@ public class WFCGenerator : MonoBehaviour
 
             collapsedSlot.ForceCollapse();
             //change it's collor and position
-            Debug.Log("New collapsed tile: [" + collapsedSlot.Position + "]" + collapsedSlot.Tile.name);
+            //Debug.Log("New collapsed tile: [" + collapsedSlot.Position + "]" + collapsedSlot.Tile.name);
 
             _map.SetTile(collapsedSlot.Position, collapsedSlot.Tile);
             _map.SetColor(collapsedSlot.Position, Color.white);
@@ -89,21 +89,22 @@ public class WFCGenerator : MonoBehaviour
             {
                 Debug.LogWarning("Contradiction detected. Reset the collapse operation.");
                 Initiate();
+                return false;
             }
+
+            return true;
         }
         else
         {
             Debug.Log("All slots collapsed");
-            return true;
+            return false;
         }
-
-        return false;
     }
 
     private bool Propagate(WFCSlot propagatorSlot)
     {
         Stack<WFCSlot> slotsStack = new Stack<WFCSlot>();
-        List<WFCSlot> visitedSlots = new List<WFCSlot>();
+        //List<WFCSlot> visitedSlots = new List<WFCSlot>();
         
         slotsStack.Push(propagatorSlot);
 
@@ -111,12 +112,13 @@ public class WFCGenerator : MonoBehaviour
         do
         {
             WFCSlot currentSlot = slotsStack.Pop();
-            visitedSlots.Add(currentSlot);
+            //visitedSlots.Add(currentSlot);
 
             foreach (Vector3Int direction in WFCModuleSet.NeighboursTilePositions)
             {
                 var newSlot = _slots.FirstOrDefault(slot => slot.Position == currentSlot.Position + direction && slot.Entropy > 0);
-                if (newSlot != null && !visitedSlots.Contains(newSlot))
+                //if (newSlot != null && !visitedSlots.Contains(newSlot))
+                if (newSlot != null)
                 {
                     var possibleTiles = _moduleSet.GetTiles(currentSlot, direction);
 

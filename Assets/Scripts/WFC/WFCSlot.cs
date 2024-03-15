@@ -70,7 +70,7 @@ public class WFCSlot
         _domain.Clear();
         _domain.Add(collapsedTile);
         
-        _entropy = 0;
+        //_entropy = 0;
     }
 
     public bool SetNewDomain(List<TileBase> propagatedSlotDomain)

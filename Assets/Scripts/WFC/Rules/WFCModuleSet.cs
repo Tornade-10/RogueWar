@@ -42,10 +42,12 @@ public class WFCModuleSet : ScriptableObject
     
     public List<TileBase> GetTiles(WFCSlot currentSlot, Vector3Int direction)
     {
-        var filteredModules = modules.Where(module =>
-            currentSlot.Domain.Contains(module.Tile));
 
         HashSet<TileBase> tiles = new HashSet<TileBase>();
+        
+        var filteredModules = modules.Where(module =>
+            currentSlot.Domain.Contains(module.Tile));
+        
         foreach (var wfcModule in filteredModules)
         {
             List<WFCModule.ModuleRule> rules = wfcModule.Rules.Where(r => r.neighbourhoodDirection == WFCModule.VectorToEnumDirection(direction)).ToList();
