@@ -14,7 +14,7 @@ for now there is no player but once I start doing it I want a "Selector" that ca
 
 # The project
 
-The scenes ehre it is all in is "WaveFunctionCollapsed" that is in the follder "Scenes" (don't mind the other scenes)
+The scene is "WaveFunctionCollapsed" that is in the follder "Scenes" (don't mind the other scenes)
 
 for comands right now, in the editor there is "step" and "clear" in the Object "generator"
 you can olso hit "play" to have a full simulation
