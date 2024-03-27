@@ -15,6 +15,15 @@ public class WFCGenerator : MonoBehaviour
     [SerializeField] private WFCModuleSet _moduleSet;
     [SerializeField] private TileBase _undetermined;
     
+    [SerializeField] private WFCModule _blueHQ;
+    [SerializeField] private WFCModule _redHQ;
+    
+    private Vector3Int _randomPositionBlue;
+    private Vector3Int _randomPositionRed;
+    
+    private List<TileBase> _blueHQTiles = new List<TileBase>();
+    private List<TileBase> _redHQTiles = new List<TileBase>();
+    
     private List<WFCSlot> _slots = new List<WFCSlot>();
     
     //size of the grid
@@ -45,6 +54,9 @@ public class WFCGenerator : MonoBehaviour
         _map.ClearAllTiles();
         _slots.Clear();
         _moduleSet.ResetTileset();
+        
+        _blueHQTiles.Add(_blueHQ.Tile);
+        _redHQTiles.Add(_redHQ.Tile);
 
         foreach (Vector3Int position in gridSpace.allPositionsWithin)
         {
@@ -52,6 +64,17 @@ public class WFCGenerator : MonoBehaviour
             _map.SetTile(position, _undetermined);
             _map.SetColor(position, Color.gray);
         }
+        
+        //add the HQ here
+
+       _randomPositionBlue.x = Random.Range(-8, -16);
+       _randomPositionBlue.y = Random.Range(2, -8);
+       
+       _randomPositionRed.x = Random.Range(8, 16);
+       _randomPositionRed.y = Random.Range(-2, 8);
+       
+        _slots.Add(new WFCSlot(_randomPositionBlue, _blueHQTiles, _blueHQ.Tile));
+        _slots.Add(new WFCSlot(_randomPositionRed, _redHQTiles, _redHQ.Tile));
     }
 
     public void Start()
@@ -64,7 +87,7 @@ public class WFCGenerator : MonoBehaviour
         Step();
     }
 
-    public bool Step()
+    public void Step()
     {
         // find minimal entropy (but greater than 0) of the grid
         var collapsableSlots = _slots.Where(slot => slot.Entropy > 0).OrderBy(slot => slot.Entropy).ToList();
@@ -89,16 +112,15 @@ public class WFCGenerator : MonoBehaviour
             {
                 Debug.LogWarning("Contradiction detected. Reset the collapse operation.");
                 Initiate();
-                return false;
             }
-
-            return true;
         }
         else
         {
             Debug.Log("All slots collapsed");
-            return false;
         }
+        
+        _map.SetTile(_randomPositionBlue, _blueHQ.Tile);
+        _map.SetTile(_randomPositionRed, _redHQ.Tile);
     }
 
     private bool Propagate(WFCSlot propagatorSlot)
@@ -107,7 +129,7 @@ public class WFCGenerator : MonoBehaviour
         //List<WFCSlot> visitedSlots = new List<WFCSlot>();
         
         slotsStack.Push(propagatorSlot);
-
+        
         //in action while there is more than 0 slots
         do
         {
@@ -121,7 +143,7 @@ public class WFCGenerator : MonoBehaviour
                 if (newSlot != null)
                 {
                     var possibleTiles = _moduleSet.GetTiles(currentSlot, direction);
-
+                    
                     if (newSlot.SetNewDomain(possibleTiles))
                     {
                         slotsStack.Push(newSlot);
