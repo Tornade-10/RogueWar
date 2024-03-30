@@ -32,40 +32,39 @@ public class Tiles : MonoBehaviour
         _hilight.SetActive(false);
     }
 
-    private void OnMouseDown()
-    {
-        if (GameManager.Instance.State != GameState.SpawnHeroes)
-        {
-            return;
-        }
-
-        if (OccupiedUnit != null)
-        {
-            if (OccupiedUnit.Faction == Faction.Hero)
-            {
-                UnitManager.Instance.SetSelectedHero((BaseHero)OccupiedUnit);
-            }
-            else
-            {
-                if (UnitManager.Instance.SelectedHero != null)
-                {
-                    var ennemy = (BaseEnemmy)OccupiedUnit;
-                    //has to be modified for hp system
-                    Destroy(ennemy.gameObject);
-                    UnitManager.Instance.SetSelectedHero(null);
-                }
-            }
-        }
-        else
-        {
-            if (UnitManager.Instance.SelectedHero != null)
-            {
-                SetUnit(UnitManager.Instance.SelectedHero);
-                UnitManager.Instance.SetSelectedHero(null);
-            }
-        }
-        
-    }
+    // private void OnMouseDown()
+    // {
+    //     if (GameManager.Instance.State != GameState.SpawnHeroes)
+    //     {
+    //         return;
+    //     }
+    //
+    //     if (OccupiedUnit != null)
+    //     {
+    //         if (OccupiedUnit.Faction == Faction.Hero)
+    //         {
+    //             UnitManager.Instance.SetSelectedHero((BaseHero)OccupiedUnit);
+    //         }
+    //         else
+    //         {
+    //             if (UnitManager.Instance.SelectedHero != null)
+    //             {
+    //                 var ennemy = (BaseEnemmy)OccupiedUnit;
+    //                 //has to be modified for hp system
+    //                 Destroy(ennemy.gameObject);
+    //                 UnitManager.Instance.SetSelectedHero(null);
+    //             }
+    //         }
+    //     }
+    //     else
+    //     {
+    //         if (UnitManager.Instance.SelectedHero != null)
+    //         {
+    //             SetUnit(UnitManager.Instance.SelectedHero);
+    //             UnitManager.Instance.SetSelectedHero(null);
+    //         }
+    //     }
+    // }
 
     public void SetUnit(BaseUnit unit)
     {

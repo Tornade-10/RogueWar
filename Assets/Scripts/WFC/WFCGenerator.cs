@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -15,14 +16,17 @@ public class WFCGenerator : MonoBehaviour
     [SerializeField] private WFCModuleSet _moduleSet;
     [SerializeField] private TileBase _undetermined;
     
-    [SerializeField] private WFCModule _blueHQ;
-    [SerializeField] private WFCModule _redHQ;
+    // [SerializeField] private WFCModule _blueHQ;
+    // [SerializeField] private WFCModule _redHQ;    
+    
+    [SerializeField] private TileBase _blueHQ;
+    [SerializeField] private TileBase _redHQ;
     
     private Vector3Int _randomPositionBlue;
     private Vector3Int _randomPositionRed;
     
-    private List<TileBase> _blueHQTiles = new List<TileBase>();
-    private List<TileBase> _redHQTiles = new List<TileBase>();
+    // private List<TileBase> _blueHQTiles = new List<TileBase>();
+    // private List<TileBase> _redHQTiles = new List<TileBase>();
     
     private List<WFCSlot> _slots = new List<WFCSlot>();
     
@@ -55,8 +59,8 @@ public class WFCGenerator : MonoBehaviour
         _slots.Clear();
         _moduleSet.ResetTileset();
         
-        _blueHQTiles.Add(_blueHQ.Tile);
-        _redHQTiles.Add(_redHQ.Tile);
+        // _blueHQTiles.Add(_blueHQ.Tile);
+        // _redHQTiles.Add(_redHQ.Tile);
 
         foreach (Vector3Int position in gridSpace.allPositionsWithin)
         {
@@ -66,15 +70,17 @@ public class WFCGenerator : MonoBehaviour
         }
         
         //add the HQ here
-
+        
        _randomPositionBlue.x = Random.Range(-8, -16);
        _randomPositionBlue.y = Random.Range(2, -8);
        
        _randomPositionRed.x = Random.Range(8, 16);
        _randomPositionRed.y = Random.Range(-2, 8);
-       
-        _slots.Add(new WFCSlot(_randomPositionBlue, _blueHQTiles, _blueHQ.Tile));
-        _slots.Add(new WFCSlot(_randomPositionRed, _redHQTiles, _redHQ.Tile));
+
+       WFCSlot blue = _slots.FirstOrDefault(slot => slot.Position == _randomPositionBlue);
+       WFCSlot red = _slots.FirstOrDefault(slot => slot.Position == _randomPositionRed);
+       blue.Tile = _blueHQ;
+       red.Tile = _redHQ;
     }
 
     public void Start()
@@ -119,8 +125,8 @@ public class WFCGenerator : MonoBehaviour
             Debug.Log("All slots collapsed");
         }
         
-        _map.SetTile(_randomPositionBlue, _blueHQ.Tile);
-        _map.SetTile(_randomPositionRed, _redHQ.Tile);
+        // _map.SetTile(_randomPositionBlue, _blueHQ.Tile);
+        // _map.SetTile(_randomPositionRed, _redHQ.Tile);
     }
 
     private bool Propagate(WFCSlot propagatorSlot)

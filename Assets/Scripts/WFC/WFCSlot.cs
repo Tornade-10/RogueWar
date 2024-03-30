@@ -34,6 +34,11 @@ public class WFCSlot
                 return _undetermined;
             }
         }
+        set
+        {
+            Debug.Log("Seems to be able to pass there");
+            _tile = value;
+        }
     }
 
     public WFCSlot(Vector3Int pos, List<TileBase> startDomain, TileBase undeterminedTile)

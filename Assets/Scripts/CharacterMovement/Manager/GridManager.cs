@@ -10,11 +10,11 @@ public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;
     
-    [SerializeField] private Vector2Int _size;
+    [SerializeField] private Vector2 _size;
 
     [SerializeField] private Tiles _tilesPrefab;
 
-    [SerializeField] private Transform _cam;
+    //[SerializeField] private Transform _cam;
 
     private Dictionary<Vector2, Tiles> _tiles;
     
@@ -22,13 +22,14 @@ public class GridManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        GenerateGrid();
     }
 
     public void GenerateGrid()
     {
-        for (int x = 0; x < _size.x; x++)
+        for (float x = -17.5f; x < _size.x; x++)
         {
-            for (int y = 0; y < _size.y; y++)
+            for (float y = -9.5f; y < _size.y; y++)
             {
                 var spawnTile = Instantiate(_tilesPrefab, new Vector3(x, y), quaternion.identity);
                 spawnTile.name = "Tile" + x + y;
@@ -40,7 +41,7 @@ public class GridManager : MonoBehaviour
             
         }
 
-        _cam.transform.position = new Vector3((float)_size.x / 2 - 0.5f, (float)_size.y / 2 - 0.5f, -10);
+        //_cam.transform.position = new Vector3((float)_size.x / 2 - 0.5f, (float)_size.y / 2 - 0.5f, -10);
         
         //once it done generating the grid pass the Game state to the next state
         GameManager.Instance.updateGameState(GameState.SpawnHeroes);
