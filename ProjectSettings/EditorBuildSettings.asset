@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/WaveFunctionCollapse.unity
     guid: 2a1980a0a231f2342bf3113b374fa4a3
   - enabled: 0

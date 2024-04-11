@@ -1679,7 +1679,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_46
+      name: BlueHQ
       rect:
         serializedVersion: 2
         x: 170
@@ -2057,7 +2057,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_64
+      name: RedHQ
       rect:
         serializedVersion: 2
         x: 170
@@ -4881,6 +4881,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      BlueHQ: 7969752024136316262
+      RedHQ: -8664873945852756419
       tilemap_0: 8490642196906846815
       tilemap_1: 7988907048659085410
       tilemap_10: -8435285650344880516
@@ -5020,7 +5022,6 @@ TextureImporter:
       tilemap_43: 6296137254373669167
       tilemap_44: -251864790952300765
       tilemap_45: -1052767623090001999
-      tilemap_46: 7969752024136316262
       tilemap_47: 8934909955309115845
       tilemap_48: 5997434355426740714
       tilemap_49: 3212541487564439254
@@ -5040,7 +5041,6 @@ TextureImporter:
       tilemap_61: -3576083122866698956
       tilemap_62: 9180185122099951743
       tilemap_63: 5584533179027898419
-      tilemap_64: -8664873945852756419
       tilemap_65: -8129655836590701982
       tilemap_66: 2628091620012382583
       tilemap_67: 8876887957534861168

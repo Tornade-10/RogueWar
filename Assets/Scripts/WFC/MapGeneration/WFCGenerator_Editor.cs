@@ -20,7 +20,7 @@ public class WFCGenerator_Editor : Editor
         
         if (GUILayout.Button("Step"))
         {
-            generator.Step();
+            generator.Step(new List<WFCSlot>());
         }
     }
 }

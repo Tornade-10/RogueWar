@@ -36,14 +36,9 @@ public class GridManager : MonoBehaviour
 
                 var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
                 
+                
                 _tilesPrefab.Init(isOffset);
             }
-            
         }
-
-        //_cam.transform.position = new Vector3((float)_size.x / 2 - 0.5f, (float)_size.y / 2 - 0.5f, -10);
-        
-        //once it done generating the grid pass the Game state to the next state
-        GameManager.Instance.updateGameState(GameState.SpawnHeroes);
     }
 }

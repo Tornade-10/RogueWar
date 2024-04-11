@@ -29,15 +29,9 @@ public class GameManager : MonoBehaviour
 
         switch (newState)
         {
-            // case GameState.GenerateGrid:
-            //     GridManager.Instance.GenerateGrid();
-            //     break;
-            // case GameState.SpawnHeroes:
-            //     UnitManager.Instance.SpawnHeroes();
-            //     break;
-            // case GameState.SpawnEnnemies:
-            //     UnitManager.Instance.SpawnEnnemy();
-            //     break;
+            case GameState.GenerateGrid:
+                GridManager.Instance.GenerateGrid();
+                break;
             case GameState.PlayerTurn:
                 break;
             case GameState.EnnemyTurn:
@@ -54,8 +48,6 @@ public class GameManager : MonoBehaviour
 public enum GameState
 {
     GenerateGrid,
-    SpawnHeroes,
-    SpawnEnnemies,
     PlayerTurn,
     EnnemyTurn
 }

@@ -17,7 +17,17 @@ public class WFCSlot
 
     public Vector3Int Position => _position;
     public float Entropy => _entropy;
-    public List<TileBase> Domain => _domain;
+    public List<TileBase> Domain
+    {
+        get
+        {
+            return _domain;
+        }
+        set
+        {
+            _domain = value;
+        }
+    }
 
     public TileBase Tile
     {
@@ -36,7 +46,6 @@ public class WFCSlot
         }
         set
         {
-            Debug.Log("Seems to be able to pass there");
             _tile = value;
         }
     }
@@ -78,12 +87,25 @@ public class WFCSlot
         _entropy = 0;
     }
 
+    public void ForceRemove(TileBase tile)
+    {
+        //Remove an unwanted tile (like the HQ)
+        if (_domain.Count <= 1 && _domain.Contains(tile))
+        {
+            Debug.Log("no other tile : " + tile.name);
+        }
+        else
+        {
+            _domain.Remove(tile);
+            _entropy = _domain.Count - 1;
+        }
+    }
+
     public bool SetNewDomain(List<TileBase> propagatedSlotDomain)
     {
         //List<TileBase> newDomain = _domain.Intersect(propagatedSlotDomain).ToList();
 
         List<TileBase> newDomain = new List<TileBase>();
-
         newDomain = propagatedSlotDomain.Intersect(_domain).ToList();
         
         Debug.Log("Existing Domain : " + TilesToString(_domain));
