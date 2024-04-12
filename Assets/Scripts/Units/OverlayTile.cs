@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using static Units.ArrowTranslator;
 
 namespace Units
 {
@@ -15,24 +17,34 @@ namespace Units
 
         public OverlayTile Previous;
         public Vector2Int gridLocation;
-        public Vector2Int grid2DLocation {get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
-        
-        private void Update()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                HideTile();
-            }
-        }
+
+        public List<Sprite> arrows;
 
         public void HideTile()
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+            SetArrowSprit(ArrowDirection.None);
         }
         
         public void ShowTile()
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        }
+
+        public void SetArrowSprit(ArrowDirection direction)
+        {
+            var arrow = GetComponentsInChildren<SpriteRenderer>()[1];
+            
+            if (direction == ArrowDirection.None)
+            {
+                arrow.color = new Color(1, 1, 1, 0);
+            }
+            else
+            {
+                arrow.color = new Color(1, 1, 1, 1);
+                arrow.sprite = arrows[(int)direction];
+                arrow.sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
+            }
         }
     }
 }

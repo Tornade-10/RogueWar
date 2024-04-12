@@ -44,6 +44,12 @@ TagManager:
   - name: Game
     uniqueID: 1128876189
     locked: 0
+  - name: OverlayTile
+    uniqueID: 465847157
+    locked: 0
+  - name: Arrow
+    uniqueID: 2676554109
+    locked: 0
   - name: Unit
     uniqueID: 1332118013
     locked: 0

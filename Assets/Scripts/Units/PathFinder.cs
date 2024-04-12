@@ -8,7 +8,7 @@ namespace Units
 {
     public class PathFinder
     {
-        public List<OverlayTile> FindPath(OverlayTile start, OverlayTile end)
+        public List<OverlayTile> FindPath(OverlayTile start, OverlayTile end, List<OverlayTile> searchableTiles)
         {
             List<OverlayTile> openList = new List<OverlayTile>();
             List<OverlayTile> closedList = new List<OverlayTile>();
@@ -28,24 +28,25 @@ namespace Units
                     //finalize the path
                     return GetFinishedList(start, end);
                 }
+
+                var GetNeightbourTiles = MapManager.Instance.GetNeightbourOverlayTiles(currentOverlayTile, searchableTiles);
                 
-                
-                foreach (var tile in GetNeightbourOverlayTiles(currentOverlayTile))
+                foreach (var neighbourTile in GetNeightbourTiles)
                 {
                     //can be modified for preventing unit to go on certain tiles
-                    if (tile.isBlocked || closedList.Contains(tile))
+                    if (neighbourTile.isBlocked || closedList.Contains(neighbourTile))
                     {
                         continue;
                     }
 
-                    tile.G = GetManhattenDistance(start, tile);
-                    tile.H = GetManhattenDistance(end, tile);
+                    neighbourTile.G = GetManhattenDistance(start, neighbourTile);
+                    neighbourTile.H = GetManhattenDistance(end, neighbourTile);
 
-                    tile.Previous = currentOverlayTile;
+                    neighbourTile.Previous = currentOverlayTile;
                     
-                    if (!openList.Contains(tile))
+                    if (!openList.Contains(neighbourTile))
                     {
-                        openList.Add(tile);
+                        openList.Add(neighbourTile);
                     }
                 }
             }
@@ -72,59 +73,6 @@ namespace Units
         private int GetManhattenDistance(OverlayTile start, OverlayTile tile)
         {
             return Mathf.Abs(start.gridLocation.x - tile.gridLocation.x) + Mathf.Abs(start.gridLocation.y - tile.gridLocation.y);
-        }
-
-        private List<OverlayTile> GetNeightbourOverlayTiles(OverlayTile currentOverlayTile)
-        {
-            var map = MapManager.Instance.map;
-
-            List<OverlayTile> neighbours = new List<OverlayTile>();
-
-            //right
-            Vector2Int locationToCheck = new Vector2Int(
-                currentOverlayTile.gridLocation.x + 1,
-                currentOverlayTile.gridLocation.y
-            );
-
-            if (map.ContainsKey(locationToCheck))
-            {
-                neighbours.Add(map[locationToCheck]);
-            }
-
-            //left
-            locationToCheck = new Vector2Int(
-                currentOverlayTile.gridLocation.x - 1,
-                currentOverlayTile.gridLocation.y
-            );
-
-            if (map.ContainsKey(locationToCheck))
-            {
-                neighbours.Add(map[locationToCheck]);
-            }
-
-            //top
-            locationToCheck = new Vector2Int(
-                currentOverlayTile.gridLocation.x,
-                currentOverlayTile.gridLocation.y + 1
-            );
-
-            if (map.ContainsKey(locationToCheck))
-            {
-                neighbours.Add(map[locationToCheck]);
-            }
-
-            //bottom
-            locationToCheck = new Vector2Int(
-                currentOverlayTile.gridLocation.x,
-                currentOverlayTile.gridLocation.y - 1
-            );
-
-            if (map.ContainsKey(locationToCheck))
-            {
-                neighbours.Add(map[locationToCheck]);
-            }
-
-            return neighbours;
         }
     }
 }
