@@ -27,8 +27,7 @@ namespace Units
             }
         }
 
-        // Start is called before the first frame update
-        void Start()
+        public void GenerateMap()
         {
             var tileMap = gameObject.GetComponentInChildren<Tilemap>();
             map = new Dictionary<Vector2Int, OverlayTile>();
@@ -57,6 +56,8 @@ namespace Units
                     }
                 }
             }
+            
+            GameManager.Instance.updateGameState(GameState.PlayerTurn);
         }
         
         public List<OverlayTile> GetNeightbourOverlayTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles)

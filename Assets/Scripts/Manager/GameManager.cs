@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Units;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -30,18 +31,23 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.GenerateGrid:
-                GridManager.Instance.GenerateGrid();
+                MapManager.Instance.GenerateMap();
                 break;
             case GameState.PlayerTurn:
+                PlayerManager.Instance.PlayerTurn();
                 break;
             case GameState.EnnemyTurn:
+                EnnemieManager.Instance.EnnemieTurn();
+                break;
+            case GameState.WonState:
+                break;
+            case GameState.LooseState:
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
 
         OnGameStateChange?.Invoke(newState);
-        
     }
 }
 
@@ -49,5 +55,7 @@ public enum GameState
 {
     GenerateGrid,
     PlayerTurn,
-    EnnemyTurn
+    EnnemyTurn,
+    WonState,
+    LooseState
 }

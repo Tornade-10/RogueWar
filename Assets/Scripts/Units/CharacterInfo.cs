@@ -12,6 +12,7 @@ namespace Units
         public int healthPoint = 10;
         public int defence = 0;
         public int attack = 1;
+        public int movement = 5;
     }
 }
 

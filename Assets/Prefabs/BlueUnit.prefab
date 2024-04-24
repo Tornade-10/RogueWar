@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 616887104567674129}
   - component: {fileID: 4878460948645378465}
   - component: {fileID: 4762815029443330135}
+  - component: {fileID: 6205256998983784965}
   m_Layer: 0
   m_Name: BlueUnit
   m_TagString: Untagged
@@ -104,6 +105,22 @@ MonoBehaviour:
   healthPoint: 10
   defence: 1
   attack: 5
+--- !u!114 &6205256998983784965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3327703567597287131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d6512f1b6119b4aa6e1acc94f2cd2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
+  speed: 0
+  characterPrefab: {fileID: 0}
+  hasMoved: 0
 --- !u!1 &8466178128607332722
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 616887104567674129}
   - component: {fileID: 4878460948645378465}
   - component: {fileID: 4762815029443330135}
+  - component: {fileID: -4835082810026673516}
   m_Layer: 0
   m_Name: RedInfenanteryUnit
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1332118013
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 20
   m_Sprite: {fileID: 8774547686465803032, guid: 48f2c3accf19e0a4f91971e1a0f98281, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -103,3 +104,22 @@ MonoBehaviour:
   healthPoint: 10
   defence: 1
   attack: 5
+--- !u!114 &-4835082810026673516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3327703567597287131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7bcee6395a7b2418a52dea3dcb944a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tilemap: {fileID: 0}
+  _tilemapDebug: {fileID: 0}
+  _strat: {fileID: 0}
+  _objective: {fileID: 0}
+  _openTile: {fileID: 0}
+  _closedTile: {fileID: 0}
+  _pathTile: {fileID: 0}
