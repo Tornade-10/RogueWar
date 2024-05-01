@@ -7,10 +7,10 @@ using Random = UnityEngine.Random;
 
 public class StateMachine
 {
-    private State _currentState;
+    private IState _currentState;
     private List<Transition> _transitions = new List<Transition>();
 
-    public void ChangeState(State newState)
+    public void ChangeState(IState newState)
     {
         _currentState?.OnExit();
 
@@ -23,23 +23,27 @@ public class StateMachine
     {
         if (_currentState is not null)
         {
+            Debug.Log("current state : " + _currentState.GetType().Name);
             _currentState.OnUpdate();
         }
         else
         {
             Debug.LogWarning("No current state");
         }
-        
         CheckTransition();
     }
 
     private void CheckTransition()
     {
         var possibleTransition = _transitions.FirstOrDefault(transition => transition._from == _currentState && transition._condition());
-        ChangeState(possibleTransition._to);
+        if (possibleTransition is not null)
+        {
+            ChangeState(possibleTransition._to);
+        }
+        
     }
 
-    public void AddTransition(State from, State to, Func<bool> condition)
+    public void AddTransition(IState from, IState to, Func<bool> condition)
     {
         if (from != null && to != null && condition != null)
         {
@@ -50,11 +54,11 @@ public class StateMachine
 
 public class Transition
 {
-    public State _from;
-    public State _to;
+    public IState _from;
+    public IState _to;
     public Func<bool> _condition;
     
-    public Transition(State from, State to, Func<bool> condition)
+    public Transition(IState from, IState to, Func<bool> condition)
     {
         _from = from;
         _to = to;

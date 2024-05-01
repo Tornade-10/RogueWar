@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 using System.Linq;
 
 [CreateAssetMenu(menuName = "WFC Module", fileName = "module")]
+[Serializable]
 public class WFCModule : ScriptableObject
 {
     

@@ -8,6 +8,9 @@ namespace Units
 {
     public class PathFinder
     {
+
+        private MapManager _mapManager;
+        
         public List<OverlayTile> FindPath(OverlayTile start, OverlayTile end, List<OverlayTile> searchableTiles)
         {
             List<OverlayTile> openList = new List<OverlayTile>();
@@ -29,7 +32,7 @@ namespace Units
                     return GetFinishedList(start, end);
                 }
 
-                var GetNeightbourTiles = GameManager.Instance.MapManager.GetNeightbourOverlayTiles(currentOverlayTile, searchableTiles);
+                var GetNeightbourTiles = _mapManager.GetNeightbourOverlayTiles(currentOverlayTile, searchableTiles);
                 
                 foreach (var neighbourTile in GetNeightbourTiles)
                 {

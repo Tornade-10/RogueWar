@@ -10,7 +10,10 @@ public class WFCAnalyzer : MonoBehaviour
 
     public void Analyze()
     {
+        _tilemap.enabled = true;
+        
         _moduleSet.Clear();
+        //return;
         
         //TileBase[] rootTile = _tilemap.GetTilesBlock(_tilemap.cellBounds);
         foreach (var tilePos in _tilemap.cellBounds.allPositionsWithin)
@@ -29,5 +32,7 @@ public class WFCAnalyzer : MonoBehaviour
                 }
             }
         }
+
+        _tilemap.enabled = false;
     }
 }

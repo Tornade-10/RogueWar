@@ -6,6 +6,8 @@ namespace Units
 {
     public class RangeFinder
     {
+        private MapManager _mapManager;
+        
         public List<OverlayTile> GetTilesInRange(OverlayTile startingTile, int range)
         {
             //var startingTile = MapManager.Instance.map[location];
@@ -24,7 +26,7 @@ namespace Units
 
                 foreach (var item in tilesForPreviousStep)
                 {
-                    surroundingTiles.AddRange(GameManager.Instance.MapManager.GetNeightbourOverlayTiles(item, new List<OverlayTile>()));
+                    surroundingTiles.AddRange(_mapManager.GetNeightbourOverlayTiles(item, new List<OverlayTile>()));
                 }
 
                 inRangeTiles.AddRange(surroundingTiles);

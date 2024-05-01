@@ -72,16 +72,6 @@ public class WFCGenerator : MonoBehaviour
         }
         
     }
-
-    public void Start()
-    {
-        Initiate();
-    }
-
-    public void Update()
-    {
-        Step(new List<WFCSlot>());
-    }
     
     public void SetHQ(TileBase HQ, BoundsInt range)
     {

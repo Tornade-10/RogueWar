@@ -64,9 +64,23 @@ public class WFCModuleSet : ScriptableObject
     {
         foreach (var module in modules)
         {
-            AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(module));
+            string path = AssetDatabase.GetAssetPath(module);
+            if(path != String.Empty)
+                AssetDatabase.DeleteAsset(path);
         }
+
+        var guids = AssetDatabase.FindAssets("t:WFCModule");
+        foreach (string guid in guids)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            if(path != String.Empty)
+                AssetDatabase.DeleteAsset(path);
+        }
+        
         modules.Clear();
+        
+        AssetDatabase.SaveAssets();
+        
     }
     
     public void AddModule(TileBase rootTile, TileBase moduleTile, Vector3Int direction)
@@ -107,6 +121,8 @@ public class WFCModuleSet : ScriptableObject
             }
         
             AssetDatabase.SaveAssets();
+            AssetDatabase.SaveAssetIfDirty(this);
+            
         }
     }
 }
