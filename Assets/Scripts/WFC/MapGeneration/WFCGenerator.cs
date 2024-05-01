@@ -11,6 +11,8 @@ using Random = UnityEngine.Random;
 
 public class WFCGenerator : MonoBehaviour
 {
+    public bool mapGenerated = false;
+    
     [SerializeField] private Tilemap _map;
     [SerializeField] private Vector2Int _size;
     [SerializeField] private WFCModuleSet _moduleSet;
@@ -20,7 +22,7 @@ public class WFCGenerator : MonoBehaviour
     [SerializeField] private TileBase _redHQ;
     private Vector3Int _randomPositionBlue;
     private Vector3Int _randomPositionRed;
-
+    
     private List<WFCSlot> _slots = new List<WFCSlot>();
 
     //size of the grid
@@ -139,6 +141,7 @@ public class WFCGenerator : MonoBehaviour
         else
         {
             Debug.Log("All slots collapsed");
+            mapGenerated = true;
         }
     }
 

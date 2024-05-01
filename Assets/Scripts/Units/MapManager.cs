@@ -8,25 +8,12 @@ namespace Units
 {
     public class MapManager : MonoBehaviour
     {
-        private static MapManager _instance;
-        public static MapManager Instance { get { return _instance; } }
 
         public GameObject overlayPrefab;
         public GameObject overlayContainer;
 
         public Dictionary<Vector2Int, OverlayTile> map;
-
-        private void Awake()
-        {
-            if(_instance != null && _instance != this)
-            {
-                Destroy(this.gameObject);
-            } else
-            {
-                _instance = this;
-            }
-        }
-
+        
         public void GenerateMap()
         {
             var tileMap = gameObject.GetComponentInChildren<Tilemap>();
@@ -56,8 +43,6 @@ namespace Units
                     }
                 }
             }
-            
-            GameManager.Instance.updateGameState(GameState.PlayerTurn);
         }
         
         public List<OverlayTile> GetNeightbourOverlayTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles)

@@ -24,7 +24,7 @@ namespace Units
 
                 foreach (var item in tilesForPreviousStep)
                 {
-                    surroundingTiles.AddRange(MapManager.Instance.GetNeightbourOverlayTiles(item, new List<OverlayTile>()));
+                    surroundingTiles.AddRange(GameManager.Instance.MapManager.GetNeightbourOverlayTiles(item, new List<OverlayTile>()));
                 }
 
                 inRangeTiles.AddRange(surroundingTiles);

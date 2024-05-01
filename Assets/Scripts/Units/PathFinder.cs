@@ -29,7 +29,7 @@ namespace Units
                     return GetFinishedList(start, end);
                 }
 
-                var GetNeightbourTiles = MapManager.Instance.GetNeightbourOverlayTiles(currentOverlayTile, searchableTiles);
+                var GetNeightbourTiles = GameManager.Instance.MapManager.GetNeightbourOverlayTiles(currentOverlayTile, searchableTiles);
                 
                 foreach (var neighbourTile in GetNeightbourTiles)
                 {
