@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 616887104567674129}
   - component: {fileID: 4878460948645378465}
-  - component: {fileID: 6205256998983784965}
   - component: {fileID: 144510098345040387}
   m_Layer: 0
   m_Name: BlueInfantery
@@ -89,20 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6205256998983784965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3327703567597287131}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0d6512f1b6119b4aa6e1acc94f2cd2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  hasMoved: 0
 --- !u!114 &144510098345040387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   standingOnTile: {fileID: 0}
+  model: {fileID: 0}
   healthPoint: 10
   defence: 0
   attack: 1

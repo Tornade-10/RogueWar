@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Units;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Workshop;
+using CharacterInfo = UnityEngine.CharacterInfo;
 
-namespace Units
+namespace AStar
 {
     public class EnnemiesMovement : MonoBehaviour
     {
@@ -38,6 +40,11 @@ namespace Units
             Vector3.left,
         };
 
+        void ShowBounds()
+        {
+            _tilemapDebug.ClearAllTiles();
+        }
+        
         public void FindPath()
         {
             _openNodes = new List<AStarNode>();
@@ -66,7 +73,7 @@ namespace Units
 
             if (_closeNodes.Count >= tileOfTheMap.Length)
             {
-                Debug.LogWarning("No Path Found");
+                Debug.LogWarning("Path not Found");
                 return;
             }
 

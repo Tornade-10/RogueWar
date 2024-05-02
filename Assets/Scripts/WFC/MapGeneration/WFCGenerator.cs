@@ -70,12 +70,10 @@ public class WFCGenerator : MonoBehaviour
             sl.ForceRemove(_blueHQ);
             sl.ForceRemove(_redHQ);
         }
-        
     }
     
     public void SetHQ(TileBase HQ, BoundsInt range)
     {
-
         Vector3Int randomPosition = new Vector3Int();
         
         randomPosition.x = Random.Range(range.xMin, range.xMax);
