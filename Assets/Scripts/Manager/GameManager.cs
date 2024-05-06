@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     public TileBase blueBarrack;
     public TileBase blueFactrory;
     public TileBase blueAirPort;
+
+    [SerializeField] private PlayerUnit _playerUnit;
     
     [Header("States")]
     public State_MapGeneration StateMapGeneration => _stateMapGeneration;
@@ -44,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         _stateMachine = new StateMachine();
         _stateMapGeneration = new State_MapGeneration(this);
-        _statePlayerTurn = new State_PlayerTurn(this);
+        _statePlayerTurn = new State_PlayerTurn(this, _playerUnit);
         _stateEnnemyTurn = new State_EnnemyTurn(this, _ennemyUnit);
         
         _stateMachine.AddTransition(_stateMapGeneration, _statePlayerTurn, () => _wfcGenerator.mapGenerated);

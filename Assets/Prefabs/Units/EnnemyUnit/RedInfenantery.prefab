@@ -99,9 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8472f8c585cae240a8c9d7e73093817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standingOnTile: {fileID: 0}
-  model: {fileID: 0}
+  isSelected: 0
+  hasMoved: 0
   healthPoint: 10
   defence: 0
   attack: 1
   movement: 5
+  position: {x: 0, y: 0, z: 0}
+  team: 1

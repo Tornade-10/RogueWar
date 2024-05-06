@@ -8,16 +8,17 @@ public class State_PlayerTurn : IState
 {
     private GameManager _gameManager;
     
-    public PlayerUnit playerModel;
+    private PlayerUnit _playerModel;
     
     private List<PlayerUnit> _playerUnits = new List<PlayerUnit>();
-    private List<TileBase> _blueBuildings = new List<TileBase>();
+    private List<Vector3Int> _blueBuildingPositions = new List<Vector3Int>();
 
     public bool playerEndTurn = false;
 
-    public State_PlayerTurn(GameManager gameManager)
+    public State_PlayerTurn(GameManager gameManager, PlayerUnit playerUnit)
     {
         _gameManager = gameManager;
+        _playerModel = playerUnit;
     }
     
     public void OnEnter()
@@ -28,11 +29,10 @@ public class State_PlayerTurn : IState
         GetTileType();
         
         //creat and place a unit for each building
-        foreach (var building in _blueBuildings)
+        foreach (var buildingPosition in _blueBuildingPositions)
         {
-            playerModel = new PlayerUnit();
-            GameObject.Instantiate(playerModel, building.GameObject().transform.position, building.GameObject().transform.rotation);
-            _playerUnits.Add(playerModel);
+            var playerUnit = GameObject.Instantiate<PlayerUnit>(_playerModel, buildingPosition + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+            _playerUnits.Add(playerUnit);
         }
     }
     
@@ -47,7 +47,7 @@ public class State_PlayerTurn : IState
 
     public void OnExit()
     {
-        _blueBuildings.Clear();
+        _blueBuildingPositions.Clear();
         //Capture all the batiment where the is a player unit
     }
     
@@ -57,11 +57,12 @@ public class State_PlayerTurn : IState
         {
             for (int y = -10; y < _gameManager.tilemap.size.y + 1; y++)
             {
-                var tileType = _gameManager.tilemap.GetTile(new Vector3Int(x, y));
+                Vector3Int position = new Vector3Int(x, y);
+                var tileType = _gameManager.tilemap.GetTile(position);
                 if (tileType == _gameManager.blueHQ)
                 {
-                    _blueBuildings.Add(tileType);
-                    Debug.Log("blue buildings" + _blueBuildings.Count);
+                    _blueBuildingPositions.Add(position);
+                    Debug.Log("blue buildings" + _blueBuildingPositions.Count);
                 }
             }
         }

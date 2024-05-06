@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using AStar;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class State_EnnemyTurn : IState
     private GameManager _gameManager;
     
     private EnnemyUnit _ennemyModel;
+    private UnitMovement _unitMovement;
     
     private List<EnnemyUnit> _ennemyUnits = new List<EnnemyUnit>();
     private List<Vector3Int> _redBuildingPositions = new List<Vector3Int>();
@@ -42,7 +44,7 @@ public class State_EnnemyTurn : IState
         //Move all the unit
         foreach (var unit in _ennemyUnits)
         {
-            //Move the unit or just skip it's turn
+            _unitMovement.MoveToTarget();
         }
     }
 

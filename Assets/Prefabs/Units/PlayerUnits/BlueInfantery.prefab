@@ -74,9 +74,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1332118013
-  m_SortingLayer: 4
-  m_SortingOrder: 20
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5701474561861110249, guid: 48f2c3accf19e0a4f91971e1a0f98281, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,12 +100,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c656b61ddc2553419f20d0383e80b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standingOnTile: {fileID: 0}
-  model: {fileID: 0}
+  isSelected: 0
+  hasMoved: 0
   healthPoint: 10
   defence: 0
   attack: 1
+  attackRange: 1
   movement: 5
+  position: {x: 0, y: 0, z: 0}
+  team: 0
+  movementType: 0
 --- !u!1 &8466178128607332722
 GameObject:
   m_ObjectHideFlags: 0

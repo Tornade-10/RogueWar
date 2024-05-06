@@ -10,13 +10,17 @@ using CharacterInfo = UnityEngine.CharacterInfo;
 
 namespace AStar
 {
-    public class EnnemiesMovement : MonoBehaviour
+    public class UnitMovement : MonoBehaviour
     {
+        public bool hasBeenReversed = false;
+        private bool _hasArrived = false;
+        
         [SerializeField] private Tilemap _tilemap;
         [SerializeField] private Tilemap _tilemapDebug;
         [SerializeField] private Transform _start;
         [SerializeField] private Transform _objective;
-
+        [SerializeField] private GameObject _unit;
+        
         private List<OverlayTile> path;
         private CharacterInfo character;
         
@@ -64,9 +68,14 @@ namespace AStar
         {
             var tileOfTheMap = _tilemap.GetTilesBlock(_tilemap.cellBounds);
 
-            if (_currentNode is not null && Vector3.Distance(_currentNode.Position, _objective.position) <= 2f)
+            if (_currentNode is not null && Vector3.Distance(_currentNode.Position, _objective.position) <= 1f)
             {
                 Debug.Log("Path Found");
+                if (!hasBeenReversed)
+                {
+                    _pathFound.Reverse();
+                    hasBeenReversed = true;
+                }
                 MoveAlongPath();
                 return;
             }
@@ -166,7 +175,20 @@ namespace AStar
 
         private void MoveAlongPath()
         {
-            this.transform.position = _objective.transform.position;
+            _unit.transform.position = Vector2.MoveTowards(_unit.transform.position, _pathFound[0].Position,
+                5f * Time.deltaTime);
+            
+            //the unit move toward the position until it come to the destination 
+            if(Vector2.Distance(_unit.transform.position, _pathFound[0].Position) < 0.00001f && _pathFound.Count >= 2)
+            {
+                _pathFound.RemoveAt(0);
+                Debug.Log(_pathFound.Count);
+            }
+            else
+            {
+                _hasArrived = true;
+                Debug.Log("arrived at destination");
+            }
         }
 
         // Start is called before the first frame update
@@ -175,11 +197,13 @@ namespace AStar
             FindPath();
         }
 
-        // Update is called once per frame
-        void Update()
+        public void MoveToTarget()
         {
-            //find the next node
-            NextNode();
+            while (!_hasArrived)
+            {
+                //find the next node
+                NextNode();
+            }
         }
     }
 }
